@@ -1,73 +1,169 @@
-# Welcome to your Lovable project
+MERN Stack Application - Admin & Agent List Distribution
 
-## Project info
+This is a basic MERN stack application that allows an Admin to log in, create and manage Agents, and upload CSV/XLSX files to distribute tasks/lists equally among agents.
 
-**URL**: https://lovable.dev/projects/eb52867a-b4de-448a-9b46-7cb082890acc
+🚀 Features
+1. Admin User Login
 
-## How can I edit this code?
+Admin can log in using Email & Password.
 
-There are several ways of editing your application.
+Authentication with JWT (JSON Web Token).
 
-**Use Lovable**
+Redirects to Dashboard on success.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/eb52867a-b4de-448a-9b46-7cb082890acc) and start prompting.
+Error messages shown on failure.
 
-Changes made via Lovable will be committed automatically to this repo.
+2. Agent Management
 
-**Use your preferred IDE**
+Add, View, Edit, and Delete agents.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Each agent has the following details:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Name
 
-Follow these steps:
+Email
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Mobile Number (with country code)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Password
 
-# Step 3: Install the necessary dependencies.
-npm i
+3. Upload & Distribute Lists
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Upload CSV/XLSX/AXLS files containing:
 
-**Edit a file directly in GitHub**
+FirstName (Text)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Phone (Number)
 
-**Use GitHub Codespaces**
+Notes (Text)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+File format validation included.
 
-## What technologies are used for this project?
+Distributes uploaded items equally among 5 agents.
 
-This project is built with:
+Example: 25 items → each agent gets 5.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Remainders are distributed sequentially.
 
-## How can I deploy this project?
+Distributed lists are saved in MongoDB.
 
-Simply open [Lovable](https://lovable.dev/projects/eb52867a-b4de-448a-9b46-7cb082890acc) and click on Share -> Publish.
+Frontend displays assigned lists per agent.
 
-## Can I connect a custom domain to my Lovable project?
+🛠️ Tech Stack
 
-Yes, you can!
+Frontend: React.js / Next.js
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Backend: Node.js + Express.js
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Database: MongoDB
+
+Authentication: JWT (JSON Web Tokens)
+
+File Handling: multer, csv-parser, xlsx
+
+⚙️ Installation & Setup
+1. Clone the Repository
+git clone https://github.com/your-username/mern-list-distribution.git
+cd mern-list-distribution
+
+2. Backend Setup
+cd backend
+npm install
+
+
+Create a .env file inside backend/ with:
+
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+
+
+Run the backend:
+
+npm start
+
+3. Frontend Setup
+cd frontend
+npm install
+
+
+Create a .env file inside frontend/ with:
+
+REACT_APP_API_URL=http://localhost:5000
+
+
+Run the frontend:
+
+npm start
+
+4. Open in Browser
+http://localhost:3000
+
+📂 Project Structure
+mern-list-distribution/
+│
+├── backend/              # Express.js + MongoDB
+│   ├── models/           # Mongoose schemas (User, Agent, List)
+│   ├── routes/           # API routes
+│   ├── controllers/      # Business logic
+│   ├── middleware/       # JWT auth, error handling
+│   ├── uploads/          # Uploaded CSV/XLSX files
+│   └── server.js         # Entry point
+│
+├── frontend/             # React/Next.js frontend
+│   ├── src/components/   # Reusable components
+│   ├── src/pages/        # Pages (Login, Dashboard, Agents, Upload)
+│   ├── src/services/     # API calls
+│   └── src/App.js        # Main app
+│
+├── README.md             # Documentation
+└── package.json
+
+🧪 API Endpoints
+Auth Routes
+
+POST /api/auth/login → Admin login
+
+Agent Routes
+
+POST /api/agents → Add agent
+
+GET /api/agents → Get all agents
+
+PUT /api/agents/:id → Update agent
+
+DELETE /api/agents/:id → Delete agent
+
+List Routes
+
+POST /api/lists/upload → Upload & distribute CSV/XLSX
+
+GET /api/lists → Get distributed lists
+
+✅ Validation & Error Handling
+
+Login → Invalid credentials handled with proper error messages.
+
+File Upload → Only .csv, .xlsx, .axls allowed.
+
+Agent Creation → Duplicate email validation.
+
+List Distribution → Edge cases handled (remainders distributed).
+
+📽️ Demo
+
+A working demo video of the application is available here:
+👉 Google Drive Demo Link
+ (Replace with your video link)
+
+🏆 Evaluation Criteria
+
+✔ Functionality – Meets all requirements
+✔ Code Quality – Clean, modular, well-documented
+✔ Validation & Error Handling – Robust and secure
+✔ User Interface – Simple and user-friendly
+✔ Execution – Easy to set up and run
+
+👨‍💻 Author
+
+Developed with ❤️ using the MERN stack.
